@@ -1,30 +1,31 @@
 # ------------------------------------------------------------------------------
 # Load libs and classes
 # ------------------------------------------------------------------------------
+require "json"
 require "set"
 
 require_relative "./domain/Kill.rb"
 require_relative "./domain/KillType.rb"
 require_relative "./domain/Match.rb"
 require_relative "./domain/MatchScore.rb"
-require_relative "./infra/log/LogLine.rb"
-require_relative "./infra/log/LogLineForConnect.rb"
-require_relative "./infra/log/LogLineForKill.rb"
-require_relative "./infra/log/LogLineForNewGame.rb"
-require_relative "./infra/log/LogParser.rb"
+require_relative "./infra/LogLine.rb"
+require_relative "./infra/LogLineForConnect.rb"
+require_relative "./infra/LogLineForKill.rb"
+require_relative "./infra/LogLineForNewGame.rb"
+require_relative "./infra/LogParser.rb"
+require_relative "./view/JsonReporter.rb"
 
 # ------------------------------------------------------------------------------
 # Init required services
 # ------------------------------------------------------------------------------
-parser = Quake::Log::LogParser.new
+parser = Quake::Infra::LogParser.new
+reporter = Quake::View::JsonReporter.new
 
 # ------------------------------------------------------------------------------
 # Parse file from fixed filename or STDIN
 # ------------------------------------------------------------------------------
-logfile = File.open("qgames.log")
+logfile = File.open("#{__dir__}/../data/qgames.log")
 matches = parser.parse_matches(logfile)
-matches.each do |match|
-    puts match.score.kills_by_player
-    puts match.score.kills_by_type
-end
+puts reporter.report_by_player(matches)
+puts reporter.report_by_kill_type(matches)
 logfile.close
