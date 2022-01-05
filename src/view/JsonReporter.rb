@@ -7,7 +7,7 @@ module Quake
           {
             "game_#{index + 1}": {
               total_kills: score.kill_count,
-              players: match.players.sort,
+              players: match.players.values.map(&:name).sort,
               kills: score.kills_by_player.sort_by { |k, v| -v }.to_h,
             },
           }

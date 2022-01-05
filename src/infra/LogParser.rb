@@ -19,7 +19,9 @@ module Quake
             current_match = Domain::Match.new
             matches << current_match
           when LogLineForConnect
-            current_match.add_player(event.client_id, event.client_name)
+            current_match.update_player(event.client_id, event.client_name)
+          when LogLineForDisconnect
+            current_match.remove_player(event.client_id)
           when LogLineForKill
             current_match.add_kill(event.killer_id, event.killed_id, event.kill_type)
           end

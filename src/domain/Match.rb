@@ -2,23 +2,42 @@ module Quake
   module Domain
     class Match
       # ------------------------------------------------------------------
-      # Init
+      # Constructor
       # ------------------------------------------------------------------
       attr_reader :players
 
       def initialize
-        @players = Set.new # all players that joined the game, even if they disconnected
-        @active_players = {} # players that are active in the game, new connections will replace old connections
+        @players = {}
         @kills = []
       end
 
-      def add_player(id, name)
-        @players << name
-        @active_players[id] = name
+      # ------------------------------------------------------------------------
+      # Modifiers
+      # ------------------------------------------------------------------------
+      def update_player(id, name)
+        id = id.to_i
+        # if exists, update name and set status to connected
+        # if not exists, create connected
+        if @players.key(id)
+          player = @players[id]
+          player.name = name
+        else
+          player = Player.new(id, name)
+          @players[id] = player
+        end
+        player.connected = true
+      end
+
+      def remove_player(id)
+        id = id.to_i
+        @players[id].connected = false
       end
 
       def add_kill(killer_id, killed_id, type)
-        @kills << Kill.new(@active_players[killer_id], @active_players[killed_id], type)
+        # create kill
+        killer_id = killer_id.to_i
+        killed_id = killed_id.to_i
+        @kills << Kill.new(killer_id, killed_id, type)
       end
 
       # ------------------------------------------------------------------

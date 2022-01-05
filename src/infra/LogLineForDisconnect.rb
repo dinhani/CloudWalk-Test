@@ -1,23 +1,22 @@
 module Quake
   module Infra
-    class LogLineForKill
+    class LogLineForDisconnect
       # ------------------------------------------------------------------
       # Static
       # ------------------------------------------------------------------
       def self.matches?(line)
-        line.include? "Kill:"
+        line.include? "ClientUserinfoChanged:"
       end
 
       # ------------------------------------------------------------------
       # Constructor
       # ------------------------------------------------------------------
-      attr_reader :killer_id, :killed_id, :kill_type
+      attr_reader :client_id
 
       # example:
-      # 20:54 Kill: 1022 2 22: <world> killed Isgalamido by MOD_TRIGGER_HURT
+      # 7:58 ClientDisconnect: 8
       def initialize(line)
-        _, _, @killer_id, @killed_id, rest = line.split(" ", 5)
-        @kill_type = rest.split(" ")[-1]
+        _, _, @client_id = line.split(" ", 4)
       end
     end
   end

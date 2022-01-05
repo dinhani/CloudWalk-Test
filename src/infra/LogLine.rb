@@ -2,14 +2,17 @@ module Quake
   module Infra
     class LogLine
       def self.parse(line)
-        if LogLineForNewGame.is_init?(line)
+        if LogLineForNewGame.matches?(line)
           return LogLineForNewGame.new(line)
         end
-        if LogLineForKill.is_kill?(line)
+        if LogLineForKill.matches?(line)
           return LogLineForKill.new(line)
         end
-        if LogLineForConnect.is_connect?(line)
+        if LogLineForConnect.matches?(line)
           return LogLineForConnect.new(line)
+        end
+        if LogLineForDisconnect.matches?(line)
+          return LogLineForDisconnect.new(line)
         end
         return nil
       end

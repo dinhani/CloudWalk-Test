@@ -2,7 +2,7 @@ module Quake
   module Domain
     class MatchScore
       # ------------------------------------------------------------------
-      # Initialize
+      # Constructor
       # ------------------------------------------------------------------
       def initialize(players, kills)
         @players = players
@@ -31,7 +31,7 @@ module Quake
       # Calculators - Private
       # ------------------------------------------------------------------
       private def initial_kills_by_player
-        @players.zip([0].cycle).to_h
+        @players.values.map(&:name).zip([0].cycle).to_h
       end
 
       private def initial_kills_by_type
@@ -40,15 +40,18 @@ module Quake
 
       private def player_kills
         @kills
-          .reject(&:killed_by_world?)
-          .group_by(&:killed)
+          .reject(&:by_world?)
+          .reject(&:by_suicide?)
+          .group_by(&:killer)
+          .transform_keys { |k| @players[k].name }
           .transform_values(&:size)
       end
 
       private def world_kills
         @kills
-          .select(&:killed_by_world?)
+          .select(&:by_world?)
           .group_by(&:killed)
+          .transform_keys { |k| @players[k].name }
           .transform_values(&:size)
       end
     end
