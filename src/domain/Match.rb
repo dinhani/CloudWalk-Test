@@ -33,18 +33,17 @@ module Quake
         @players[id].connected = false
       end
 
-      def add_kill(killer_id, killed_id, type)
-        # create kill
+      def add_kill(killer_id, victim_id, type)
         killer_id = killer_id.to_i
-        killed_id = killed_id.to_i
-        @kills << Kill.new(killer_id, killed_id, type)
+        victim_id = victim_id.to_i
+        @kills << Kill.new(killer_id, victim_id, type)
       end
 
       # ------------------------------------------------------------------
       # Report
       # ------------------------------------------------------------------
       def score
-        MatchScore.new(@players, @kills)
+        MatchScore.new(@players.clone, @kills.clone)
       end
     end
   end

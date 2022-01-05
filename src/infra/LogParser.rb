@@ -23,7 +23,7 @@ module Quake
           when LogLineForDisconnect
             current_match.remove_player(event.client_id)
           when LogLineForKill
-            current_match.add_kill(event.killer_id, event.killed_id, event.kill_type)
+            current_match.add_kill(event.killer_id, event.victim_id, event.kill_type)
           end
         end
         matches
