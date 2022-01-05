@@ -10,7 +10,7 @@ describe Quake::Domain::Match do
     expect(match.players[1].name).to eq("Renato")
     expect(match.players.size).to eq(1)
 
-    match.update_player(2, "CloudWalk")
+    match.update_player("2", "CloudWalk")
     expect(match.players[2].name).to eq("CloudWalk")
     expect(match.players.size).to eq(2)
   end

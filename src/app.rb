@@ -32,7 +32,7 @@ log_file = File.open(log_filename)
 # Parse log file
 # ------------------------------------------------------------------------------
 puts "Parsing logfile: #{File.absolute_path(log_file)}"
-matches = Quake::Infra::LogParser.parse_matches(log_file)
+matches = parser.parse_matches(log_file)
 log_file.close
 
 # ------------------------------------------------------------------------------

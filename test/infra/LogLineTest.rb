@@ -1,4 +1,4 @@
-describe Quake::Infra::LogParser do
+describe Quake::Infra::LogLine do
   lines = [
     "aaa",
     '0:00 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0',
@@ -10,14 +10,17 @@ describe Quake::Infra::LogParser do
     "eee",
     '0:00 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0',
   ]
-  parser = Quake::Infra::LogParser.new
 
-  it "parses the matches correctly" do
-    matches = parser.parse_matches(lines)
-    expect(matches.size).to eq(2)
-
-    matches = parser.parse_matches(lines)
-    expect(matches[0].players.size).to eq(1)
-    expect(matches[0].kills.size).to eq(1)
+  it "parses the lines correctly" do
+    parsed = lines.map { |line| Quake::Infra::LogLine.parse(line) }
+    expect(parsed[0]).to be_nil
+    expect(parsed[1]).to be_instance_of(Quake::Infra::LogLineForNewGame)
+    expect(parsed[2]).to be_nil
+    expect(parsed[3]).to be_nil
+    expect(parsed[4]).to be_instance_of(Quake::Infra::LogLineForConnect)
+    expect(parsed[5]).to be_nil
+    expect(parsed[6]).to be_instance_of(Quake::Infra::LogLineForKill)
+    expect(parsed[7]).to be_nil
+    expect(parsed[8]).to be_instance_of(Quake::Infra::LogLineForNewGame)
   end
 end
