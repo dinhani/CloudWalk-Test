@@ -20,7 +20,7 @@ module Quake
 
       def kills_by_type
         kills_by_type = @kills.group_by(&:type).transform_values(&:size)
-        initial_kills_by_type.merge(kills_by_type)
+        initial_kills_by_type.merge(kills_by_type) { |_, ik, tk| tk }
       end
 
       def kill_count
@@ -35,7 +35,7 @@ module Quake
       end
 
       private def initial_kills_by_type
-        KillType.constants.zip([0].cycle).to_h
+        KillType.constants.map(&:to_s).zip([0].cycle).to_h
       end
 
       private def player_kills
