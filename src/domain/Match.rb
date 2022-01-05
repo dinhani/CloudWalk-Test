@@ -4,7 +4,7 @@ module Quake
       # ------------------------------------------------------------------
       # Constructor
       # ------------------------------------------------------------------
-      attr_reader :players
+      attr_reader :players, :kills
 
       def initialize
         @players = {}
@@ -16,8 +16,8 @@ module Quake
       # ------------------------------------------------------------------------
       def update_player(id, name)
         id = id.to_i
-        # if exists, update name and set status to connected
-        # if not exists, create connected
+        # if exists, update name
+        # if not exists, create it
         if @players.key(id)
           player = @players[id]
           player.name = name
@@ -25,12 +25,6 @@ module Quake
           player = Player.new(id, name)
           @players[id] = player
         end
-        player.connected = true
-      end
-
-      def remove_player(id)
-        id = id.to_i
-        @players[id].connected = false
       end
 
       def add_kill(killer_id, victim_id, type)

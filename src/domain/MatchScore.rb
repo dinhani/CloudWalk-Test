@@ -19,7 +19,7 @@ module Quake
       end
 
       def kills_by_type
-        kills_by_type = @kills.group_by(&:type).transform_values(&:size)
+        kills_by_type = @kills.reject(&:by_suicide?).group_by(&:type).transform_values(&:size)
         initial_kills_by_type.merge(kills_by_type) { |_, ik, tk| tk }
       end
 

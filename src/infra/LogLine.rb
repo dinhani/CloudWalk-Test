@@ -11,9 +11,6 @@ module Quake
         if LogLineForConnect.matches?(line)
           return LogLineForConnect.new(line)
         end
-        if LogLineForDisconnect.matches?(line)
-          return LogLineForDisconnect.new(line)
-        end
         return nil
       end
     end
