@@ -56,7 +56,7 @@ Classes in this layer knows the `domain` classes and are responsible for creatin
 
 Classes that are responsible for formatting and presenting data, like converting a domain entity to JSON, XML or HTML.
 
-### Clarifications
+### Details about the reports
 
 #### Report - Kills by player
 
@@ -64,13 +64,15 @@ Classes that are responsible for formatting and presenting data, like converting
 
 * All players that connected to the match are included in the response, even if the player did not kill and was not killed by anyone.
 
+* The score of a player can be negative instead of stopping at zero if it was killed more times by the World than his kill count.
+
 * Death by suicide are not counted.
 
 #### Report - Kills by type
 
 * The keys in the JSON are sorted from the type with most kills to the one with less kills.
 
-* All types are included in the report, even the ones that did not happen in the game.
+* All types are included in the report, even the ones that did not happen in the match.
 
 * Death by suicide are not counted.
 
