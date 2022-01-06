@@ -32,7 +32,7 @@ The class organization is loosely based on DDD and Clean Architecture, even thou
 
 The general idea of the script is to determine all the players that joined a match using their client IDs and keep track of all deaths that happened.
 
-When requested, the array of death events is reduced to a single state to determine the number of kills by each player of each type of death.
+When requested, the array of death events is reduced to a single state to determine the number of kills by each player or each type of death.
 
 ### `root/app.rb`
 
