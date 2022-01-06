@@ -34,7 +34,7 @@ The general idea of the script is to determine all the players that joined a mat
 
 When requested, the array of death events is reduced to a single state to determine the number of kills by each player or each type of death.
 
-### `root/app.rb`
+### `app.rb`
 
 Entry-point for executing this application.
 
