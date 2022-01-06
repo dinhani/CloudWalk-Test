@@ -77,6 +77,6 @@ Classes that are responsible for formatting and presenting data, like converting
 * Deaths by suicide are not counted.
 
 
-Example of death by suicide:
+#### Example of death by suicide:
 
 `8:13 Kill: 7 7 7: Assasinu Credi killed Assasinu Credi by MOD_ROCKET_SPLASH`
