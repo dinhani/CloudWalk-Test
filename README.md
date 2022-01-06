@@ -66,7 +66,7 @@ Classes that are responsible for formatting and presenting data, like converting
 
 * The score of a player can be negative instead of stopping at zero if it was killed more times by the World than his kill count.
 
-* Death by suicide are not counted.
+* Deaths by suicide are not counted.
 
 #### Report - Kills by type
 
@@ -74,7 +74,7 @@ Classes that are responsible for formatting and presenting data, like converting
 
 * All types are included in the report, even the ones that did not happen in the match.
 
-* Death by suicide are not counted.
+* Deaths by suicide are not counted.
 
 
 Example of death by suicide:
