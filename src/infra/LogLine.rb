@@ -2,16 +2,8 @@ module Quake
   module Infra
     class LogLine
       def self.parse(line)
-        if LogLineForNewGame.matches?(line)
-          return LogLineForNewGame.new(line)
-        end
-        if LogLineForKill.matches?(line)
-          return LogLineForKill.new(line)
-        end
-        if LogLineForConnect.matches?(line)
-          return LogLineForConnect.new(line)
-        end
-        return nil
+        parser = [LogLineForNewGame, LogLineForKill, LogLineForConnect].find { |parser| parser.matches?(line) }
+        return parser.new(line) unless parser.nil?
       end
     end
   end
