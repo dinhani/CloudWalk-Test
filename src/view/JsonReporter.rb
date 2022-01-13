@@ -15,7 +15,8 @@ module Quake
             kills: score
               .kills_by_player
               .transform_keys { |k| match.players[k].name }
-              .sort_by { |k, v| -v }.to_h,
+              .sort_by { |k, v| -v }
+              .to_h,
           }
         }
         JSON.pretty_generate(report)
@@ -28,7 +29,8 @@ module Quake
           report["game_#{index + 1}"] = {
             kills_by_means: score
               .kills_by_type
-              .sort_by { |k, v| -v }.to_h,
+              .sort_by { |k, v| -v }
+              .to_h,
           }
         }
         JSON.pretty_generate(report)
