@@ -7,7 +7,7 @@ module Quake
       # Static
       # ------------------------------------------------------------------
       def self.matches?(line)
-        line.include? "Kill:"
+        line.include? 'Kill:'
       end
 
       # ------------------------------------------------------------------
@@ -18,8 +18,8 @@ module Quake
       # example:
       # 20:54 Kill: 1022 2 22: <world> killed Isgalamido by MOD_TRIGGER_HURT
       def initialize(line)
-        _, _, @killer_id, @victim_id, rest = line.split(" ", 5)
-        @kill_type = rest.split(" ")[-1]
+        _, _, @killer_id, @victim_id, rest = line.split(' ', 5)
+        @kill_type = rest.split(' ')[-1]
       end
     end
   end

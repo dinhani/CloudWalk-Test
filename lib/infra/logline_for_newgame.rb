@@ -5,7 +5,7 @@ module Quake
       # Static
       # ------------------------------------------------------------------
       def self.matches?(line)
-        line.include? "InitGame:"
+        line.include? 'InitGame:'
       end
 
       # ------------------------------------------------------------------

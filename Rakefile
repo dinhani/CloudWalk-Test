@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'rubocop/rake_task'
+require 'rufo'
 
 # ------------------------------------------------------------------------------
 # Execution
@@ -21,3 +22,22 @@ end
 # Linter
 # ------------------------------------------------------------------------------
 RuboCop::RakeTask.new(:lint)
+
+task :format do
+    begin
+        Rufo::Command.run(["."])
+    rescue SystemExit
+        # ignore exit
+    end
+    FileList["**/*.rb"].each do |filename|
+        content = File.read(filename).delete("\r")
+        File.open(filename, "wb") do |f|
+            f.write(content)
+        end
+    end
+end
+
+task :wat do
+    puts
+    File.write("wat.txt", "wat\nwut")
+end
