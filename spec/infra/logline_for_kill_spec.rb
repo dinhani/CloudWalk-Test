@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Quake::Infra::LogLineForKill do
   line = "20:54 Kill: 1022 2 22: <world> killed Isgalamido by MOD_TRIGGER_HURT"
 

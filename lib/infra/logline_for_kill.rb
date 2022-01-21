@@ -1,3 +1,5 @@
+
+# frozen_string_literal: true
 module Quake
   module Infra
     class LogLineForKill

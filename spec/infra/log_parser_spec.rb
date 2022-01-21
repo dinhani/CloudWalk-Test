@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Quake::Infra::LogParser do
   lines = [
     "aaa",

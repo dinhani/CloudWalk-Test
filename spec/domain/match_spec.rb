@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Quake::Domain::Match do
   match = Quake::Domain::Match.new
 
