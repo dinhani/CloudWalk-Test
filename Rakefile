@@ -21,11 +21,15 @@ end
 # ------------------------------------------------------------------------------
 # Linter
 # ------------------------------------------------------------------------------
-RuboCop::RakeTask.new(:lint)
+RuboCop::RakeTask.new(:lint) do |t|
+    t.fail_on_error = false
+    t.patterns = ["**/*.rb"]
+    t.verbose = true
+end
 
 task :format do
     begin
-        Rufo::Command.run(["."])
+        Rufo::Command.run(["bin", "lib", "spec"])
     rescue SystemExit
         # ignore exit
     end
@@ -35,9 +39,4 @@ task :format do
             f.write(content)
         end
     end
-end
-
-task :wat do
-    puts
-    File.write("wat.txt", "wat\nwut")
 end
